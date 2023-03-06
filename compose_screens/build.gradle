@@ -1,0 +1,117 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'uz.gita.banking_app_geberit'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "uz.gita.banking_app_geberit"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.3.2'
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.md'
+
+
+    }
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
+}
+
+dependencies {
+
+    compileOnly project(path: ':domain')
+    compileOnly 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+    implementation 'androidx.activity:activity-compose:1.6.1'
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
+    implementation 'androidx.compose.material3:material3:1.1.0-alpha04'
+    compileOnly 'junit:junit:4.13.2'
+    compileOnly 'androidx.test.ext:junit:1.1.5'
+    compileOnly 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+    implementation project(path: ":presentor")
+    compileOnly project(path: ":core")
+    //koin
+    def koin_version = "3.2.2"
+    def koin_android_version = "3.2.3"
+    compileOnly "io.insert-koin:koin-core:$koin_version"
+    // Koin for JUnit 4
+    compileOnly "io.insert-koin:koin-test-junit4:$koin_version"
+    // Koin for JUnit 5
+    compileOnly "io.insert-koin:koin-test-junit5:$koin_version"
+    // Koin main features for Android
+    compileOnly "io.insert-koin:koin-android:$koin_android_version"
+    // No more koin-android-viewmodel, koin-android-scope, koin-android-fragment
+    // Jetpack WorkManager
+    compileOnly "io.insert-koin:koin-androidx-workmanager:$koin_android_version"
+    // Navigation Graph
+    compileOnly "io.insert-koin:koin-androidx-navigation:$koin_android_version"
+    def koin_android_compose_version = "3.2.2"
+    // Jetpack Compose
+    implementation "io.insert-koin:koin-androidx-compose:$koin_android_compose_version"
+    compileOnly("org.orbit-mvi:orbit-compose:4.3.2")
+    compileOnly("org.orbit-mvi:orbit-viewmodel:4.3.2")
+    implementation project(path: ":data")
+    compileOnly project(path: ":domain")
+    def currentVersion = '1.0.0-rc03'
+
+    // Navigator //voyager
+    implementation "cafe.adriel.voyager:voyager-navigator:$currentVersion"
+    // BottomSheetNavigator//voyager
+    implementation "cafe.adriel.voyager:voyager-bottom-sheet-navigator:$currentVersion"
+    // TabNavigator//voyager
+    implementation "cafe.adriel.voyager:voyager-tab-navigator:$currentVersion"
+    // Transitions//voyager
+    implementation "cafe.adriel.voyager:voyager-transitions:$currentVersion"
+    // Android ViewModel integration//voyager
+    implementation "cafe.adriel.voyager:voyager-androidx:$currentVersion"
+
+    implementation "com.airbnb.android:lottie-compose:5.2.0"
+
+// Koin integration
+    implementation "cafe.adriel.voyager:voyager-koin:$currentVersion"
+
+// tab Compose
+    implementation "com.google.accompanist:accompanist-pager:0.25.0"
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.25.0"
+
+    implementation "io.github.vanpra.compose-material-dialogs:datetime:0.8.1-rc"
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.6'
+
+}

@@ -1,0 +1,73 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'uz.gita.xml_screens'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "uz.gita.xml_screens"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.md'
+
+
+    }
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
+}
+
+dependencies {
+
+    compileOnly 'androidx.core:core-ktx:1.9.0'
+    compileOnly 'androidx.appcompat:appcompat:1.6.0'
+    compileOnly 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    compileOnly 'junit:junit:4.13.2'
+    compileOnly 'androidx.test.ext:junit:1.1.5'
+    compileOnly 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation project(path:":presentor")
+    compileOnly project(path:":core")
+
+    //koin
+    def koin_version = "3.2.2"
+    def koin_android_version = "3.2.3"
+    def koin_android_compose_version = "3.2.2"
+    compileOnly "io.insert-koin:koin-core:$koin_version"
+    // Koin for JUnit 4
+    compileOnly "io.insert-koin:koin-test-junit4:$koin_version"
+    // Koin for JUnit 5
+    compileOnly "io.insert-koin:koin-test-junit5:$koin_version"
+    // Koin main features for Android
+    compileOnly "io.insert-koin:koin-android:$koin_android_version"
+    // No more koin-android-viewmodel, koin-android-scope, koin-android-fragment
+    // Jetpack WorkManager
+    compileOnly "io.insert-koin:koin-androidx-workmanager:$koin_android_version"
+    // Navigation Graph
+    compileOnly "io.insert-koin:koin-androidx-navigation:$koin_android_version"
+    // Jetpack Compose
+    compileOnly "io.insert-koin:koin-androidx-compose:$koin_android_compose_version"
+}
